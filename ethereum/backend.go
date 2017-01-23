@@ -3,6 +3,7 @@ package ethereum
 import (
 	"bytes"
 	"encoding/hex"
+	"fmt"
 	"reflect"
 	"unsafe"
 
@@ -101,7 +102,9 @@ func (s *Backend) Config() *eth.Config {
 func (s *Backend) txBroadcastLoop() {
 	for obj := range s.txSub.Chan() {
 		event := obj.Data.(core.TxPreEvent)
+		log.Warn(fmt.Sprintf("Broadcast, tx=%v", event.Tx))
 		err := s.BroadcastTx(event.Tx)
+		log.Warn(fmt.Sprintf("Broadcast, err=%s", err))
 		glog.V(logger.Info).Infof("Broadcast, err=%s", err)
 	}
 }
@@ -117,6 +120,7 @@ func (s *Backend) BroadcastTx(tx *ethTypes.Transaction) error {
 		"tx": hex.EncodeToString(buf.Bytes()),
 	}
 	_, err := s.client.Call("broadcast_tx_sync", params, &result)
+	log.Warn(fmt.Sprintf("Broadcast, res=%v, err=%v", result, err))
 	return err
 }
 
