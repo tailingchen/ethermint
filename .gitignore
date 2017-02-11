@@ -1,3 +1,5 @@
 cmd/ethermint/ethermint
 data
 dev/data
+test/p2p/data
+test/p2p/node_modules

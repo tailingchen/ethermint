@@ -22,3 +22,4 @@ RUN go install ./cmd/ethermint
 
 EXPOSE 46656
 EXPOSE 46657
+EXPOSE 8545

@@ -20,4 +20,4 @@ docker run -d \
 	--name local_testnet_$ID \
 	--entrypoint ethermint \
 	-e TMROOT=/go/src/github.com/tendermint/ethermint/test/p2p/data/mach$ID \
-	$DOCKER_IMAGE --datadir \$TMROOT $SEEDS --log_level=notice
+	$DOCKER_IMAGE --rpc --datadir \$TMROOT $SEEDS
